@@ -2,7 +2,7 @@
  * @Author: abbeymart | Abi Akindele | @Created: 2020-07-11
  * @Company: Copyright 2020 Abi Akindele  | mConnect.biz
  * @License: All Rights Reserved | LICENSE.md
- * @Description: mc: success scenarios test
+ * @Description: mc: success scenarios testing
  */
 
 import { Status } from "https://deno.land/std/http/http_status.ts";
@@ -11,7 +11,7 @@ import { getResMessage } from "../mod.ts";
 
 let msgType = 'success',
     options = {
-        value  : '',
+        value  : ['a', 'b', 'c'],
         code   : '',
         message: '',
     },
@@ -35,7 +35,7 @@ Deno.test({
 Deno.test({
     name: 'should return ok/200 resCode for success-message',
     fn  : () => {
-        const req = getResMessage(msgType, {});
+        const req = getResMessage(msgType);
         assertEquals(res.resCode, req.resCode, `resCode should be: ${res.resCode}`);
         assertEquals(res.resMessage, req.resMessage, `resCode should be: ${res.resMessage}`);
     }
@@ -50,9 +50,14 @@ Deno.test({
 });
 
 Deno.test({
-    name: 'should return success code for success-message',
+    name: 'should return correct default message',
     fn  : () => {
+        options = {
+            value  : ['a', 'b', 'c'],
+            code   : '',
+            message: 'Successful',
+        }
         const req = getResMessage(msgType, options);
-        assertEquals(res.code, req.code, 'response-code should be: success');
+        assertEquals(options.message, req.message, `message should be: ${options.message}`);
     }
 });
