@@ -33,7 +33,7 @@ function msgFunc(code: string, resCode: number, resMessage: string, msg: string,
     };
 }
 
-export function getResMessage(msgType: string = '', options: ResponseMessageOptions): ResponseMessage {
+export function getResMessage(msgType: string = '', options?: ResponseMessageOptions): ResponseMessage {
     let value: any,
         code: string,
         resCode: number,
